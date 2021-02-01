@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPodStorage", "IPodStorage\IPodStorage.csproj", "{3A5F7C15-B497-4B2A-91EB-5F381C929897}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IPodStorage", "IPodStorage\IPodStorage.csproj", "{3A5F7C15-B497-4B2A-91EB-5F381C929897}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPodStorageUnitTests", "IPodStorageUnitTests\IPodStorageUnitTests.csproj", "{A746F047-D636-4107-9747-1D4EAC7A9087}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{3A5F7C15-B497-4B2A-91EB-5F381C929897}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A5F7C15-B497-4B2A-91EB-5F381C929897}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A5F7C15-B497-4B2A-91EB-5F381C929897}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A746F047-D636-4107-9747-1D4EAC7A9087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A746F047-D636-4107-9747-1D4EAC7A9087}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A746F047-D636-4107-9747-1D4EAC7A9087}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A746F047-D636-4107-9747-1D4EAC7A9087}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
