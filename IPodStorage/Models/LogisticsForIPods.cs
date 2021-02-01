@@ -6,12 +6,11 @@ namespace IPodStorage.Models
 {
     public class LogisticsForIPods
     {
-        public string PrimaryCountry { get; set; }
-        public string SecondaryCountry { get; set; }
-        public int UnitsDeliveredByPrimaryCounry { get; set; }
-        public int UnitsDeliveredBySecondaryCounry { get; set; }
-        public float PricePrimaryCountry { get; set; }
-        public float PriceSecondaryCountry { get; set; }
+        public DeliverableCountryName CountryNames { get; set; }
+        public UnitsDeliverable UnitsDeliverable { get; set; }
+        public PricePerCountry PricePerUnit { get; set; }
+        public CountryBestPrice PricePayableFor { get; set; }
+        public bool IsExtraShippingPriceRequired { get; set; }
 
     }
 }

@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Thrill\\POCz\\iPodsStorage\\IPodStorage\\IPodStorage\\IPodStorage.csproj",
+      "projectUniqueName": "F:\\Thrill\\POCz\\iPodsStorage\\iPod-Repository\\IPodStorage\\IPodStorage.csproj",
       "projectName": "IPodStorage",
-      "projectPath": "F:\\Thrill\\POCz\\iPodsStorage\\IPodStorage\\IPodStorage\\IPodStorage.csproj",
+      "projectPath": "F:\\Thrill\\POCz\\iPodsStorage\\iPod-Repository\\IPodStorage\\IPodStorage.csproj",
       "packagesPath": "C:\\Users\\Mayank\\.nuget\\packages\\",
-      "outputPath": "F:\\Thrill\\POCz\\iPodsStorage\\IPodStorage\\IPodStorage\\obj\\",
+      "outputPath": "F:\\Thrill\\POCz\\iPodsStorage\\iPod-Repository\\IPodStorage\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Mayank\\AppData\\Roaming\\NuGet\\NuGet.Config",
