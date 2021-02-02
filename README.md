@@ -26,7 +26,7 @@ The units ordered must be multiples of 10.
 
 ii) Brazil : 50
 
-4500 : 100 : 50
+5000 : 100 : 50
 
 iii) Argentina : 120
 
