@@ -1,19 +1,24 @@
 ﻿using IPodStorage.ENums;
+using IPodStorage.Interfaces;
+using IPodStorage.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace IPodStorage.CommonHelpers
 {
-    public static class CalculatePrice
+    public class CalculatePrice
     {
-        public static float CalculatePriceByCountry(int numberOfUnits,float pricePerUnit, bool isExtraShippingChargeRequired)
-        {
-            float price = 0.0f;
-            int isExtraShippingNeeded = isExtraShippingChargeRequired ? 1 : 0;
-            price = numberOfUnits * pricePerUnit + isExtraShippingNeeded * (numberOfUnits / 10.0f) * 400f;
+        private ICountryPriceService _countryPriceService;
 
-            return price;
+        public CalculatePrice()
+        {
+            _countryPriceService = new CountryPriceService();
+        }
+
+        public float CalculatePriceByCountry(int numberOfUnits,float pricePerUnit, bool isExtraShippingChargeRequired)
+        {            
+            return _countryPriceService.CalculateBestPrice(numberOfUnits, pricePerUnit, isExtraShippingChargeRequired);
         }
     }
 }

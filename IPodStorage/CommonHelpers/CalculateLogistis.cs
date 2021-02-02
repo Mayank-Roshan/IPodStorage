@@ -1,54 +1,52 @@
 ﻿using IPodStorage.Constants;
 using IPodStorage.ENums;
+using IPodStorage.Interfaces;
 using IPodStorage.Models;
+using IPodStorage.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace IPodStorage.CommonHelpers
 {
-    public static class CalculateLogistis
+    public class CalculateLogistis
     {
-        public static LogisticsForIPods CalculateIPodsLogistics(string primaryCountry, int totalRequiredNumberOfUnits)
+        private ICountryDeliverablesService _countryDeliverableSevice;
+        private ICountryPriceService _countryPriceService;
+        private IUnitsService _unitsService;
+
+        public CalculateLogistis(ICountryDeliverablesService countryDeliverableSevice,
+                                 ICountryPriceService countryPriceService,
+                                 IUnitsService unitsService
+
+                                )
+        {
+            _countryDeliverableSevice = countryDeliverableSevice;
+            _countryPriceService = countryPriceService;
+            _unitsService = unitsService;
+        }
+
+        public CalculateLogistis()
+        {
+            _countryDeliverableSevice = new CountryDeliverablesService();
+            _countryPriceService = new CountryPriceService();
+            _unitsService = new UnitsService();
+        }
+
+        public LogisticsForIPods CalculateIPodsLogistics(string primaryCountry, int totalRequiredNumberOfUnits)
         {
             if((totalRequiredNumberOfUnits > (Convert.ToInt32(CountryStorageCapacity.ArgentinaStorage) + Convert.ToInt32(CountryStorageCapacity.BrazilStorage))) || totalRequiredNumberOfUnits % 10 != 0)
                 return null;
             var ipodLogistics = new LogisticsForIPods()
             {
-                CountryNames = new DeliverableCountryName()
-                                    {
-                                        CountryPrimary = primaryCountry,
-                                        CountrySecondary = string.Equals(Convert.ToString(Countries.Brazil), primaryCountry.Trim(), StringComparison.OrdinalIgnoreCase) ? Convert.ToString(Countries.Argentina) : Convert.ToString(Countries.Brazil),
-                                    },
-                UnitsDeliverable = GetUnitsDeliverablePerCountry(primaryCountry.ToLower(), totalRequiredNumberOfUnits),
-                PricePerUnit = new PricePerCountry()
-                {
-                    PrimaryCountry = string.Equals(Convert.ToString(Countries.Brazil), primaryCountry.Trim(), StringComparison.OrdinalIgnoreCase) ?
-                                     LogisticsConstant.PricePerUnitBrazil : LogisticsConstant.PricePerUnitArgentina,
-                    SecondaryCountry = string.Equals(Convert.ToString(Countries.Brazil), primaryCountry.Trim(), StringComparison.OrdinalIgnoreCase) ?
-                                        LogisticsConstant.PricePerUnitArgentina : LogisticsConstant.PricePerUnitBrazil,
-                },
+                CountryNames = _countryDeliverableSevice.GetCountryDeliverableOrder(primaryCountry),
+                UnitsDeliverable = _unitsService.GetUnitsDeliverablePerCountry(primaryCountry.ToLower(), totalRequiredNumberOfUnits),
+                PricePerUnit = _countryPriceService.CalculatePricePerCountry(primaryCountry),
                 PricePayableFor = new CountryBestPrice()
             };
-            ipodLogistics.IsExtraShippingPriceRequired = (ipodLogistics.UnitsDeliverable.BySecondaryCounry > 0) ? true : false;
+            ipodLogistics.IsExtraShippingPriceRequired = _countryPriceService.IsExtraShippingCostRequired(ipodLogistics.UnitsDeliverable.BySecondaryCounry);
             
             return ipodLogistics;
         }
-
-        public static UnitsDeliverable GetUnitsDeliverablePerCountry(string primaryCountry,int totalRequiredNumberOfUnits)
-        {
-            var unitsDeliverable = new UnitsDeliverable();
-            var primaryCountryMaximumStorage = string.Equals((Convert.ToString(Countries.Brazil)), primaryCountry, StringComparison.OrdinalIgnoreCase) ? LogisticsConstant.ForBrazilStorage : LogisticsConstant.ForArgentinaStorage;
-            //var secondaryCountryMaximumStorage = string.Equals((Convert.ToString(Countries.Brazil)), primaryCountry, StringComparison.OrdinalIgnoreCase) ? StorageConstants.ForArgentina : StorageConstants.ForBrazil;
-
-            var difference = totalRequiredNumberOfUnits - primaryCountryMaximumStorage;
-            unitsDeliverable.BySecondaryCounry = (difference >= 0) ? difference : 0;
-            unitsDeliverable.ByPrimaryCounry = (difference >= 0) ? primaryCountryMaximumStorage : totalRequiredNumberOfUnits;
-
-            return unitsDeliverable;
-        }
-
-
-
     }
 }
