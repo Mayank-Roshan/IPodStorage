@@ -1,9 +1,6 @@
-﻿using IPodStorage.ENums;
-using IPodStorage.Interfaces;
+﻿using IPodStorage.Interfaces;
+using IPodStorage.Models;
 using IPodStorage.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace IPodStorage.CommonHelpers
 {
@@ -14,6 +11,18 @@ namespace IPodStorage.CommonHelpers
         public CalculatePrice()
         {
             _countryPriceService = new CountryPriceService();
+        }
+
+        public float CalculateBestPrice(LogisticsForIPods iPodLogisticsDistribution)
+        {
+            iPodLogisticsDistribution.PricePayableFor.PrimaryCountry = CalculatePriceByCountry(iPodLogisticsDistribution.UnitsDeliverable.ByPrimaryCounry, iPodLogisticsDistribution.PricePerUnit.PrimaryCountry, false);
+
+            if (iPodLogisticsDistribution.IsExtraShippingPriceRequired)
+            {
+                iPodLogisticsDistribution.PricePayableFor.SecondaryCountry = CalculatePriceByCountry(iPodLogisticsDistribution.UnitsDeliverable.BySecondaryCounry, iPodLogisticsDistribution.PricePerUnit.SecondaryCountry, true);
+            }
+
+            return (iPodLogisticsDistribution.PricePayableFor.PrimaryCountry + iPodLogisticsDistribution.PricePayableFor.SecondaryCountry);
         }
 
         public float CalculatePriceByCountry(int numberOfUnits,float pricePerUnit, bool isExtraShippingChargeRequired)

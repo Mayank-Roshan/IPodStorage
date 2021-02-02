@@ -1,5 +1,4 @@
 ﻿using IPodStorage.CommonHelpers;
-using IPodStorage.ENums;
 using System;
 
 namespace IPodStorage
@@ -18,15 +17,10 @@ namespace IPodStorage
             {
                 ErrorHandler.DiplayError(Convert.ToInt32(countryiPodsRequiredArray[1].Trim()));
             }
-
             var priceCalculator = new CalculatePrice();
-            iPodLogisticsDistribution.PricePayableFor.PrimaryCountry = priceCalculator.CalculatePriceByCountry(iPodLogisticsDistribution.UnitsDeliverable.ByPrimaryCounry, iPodLogisticsDistribution.PricePerUnit.PrimaryCountry, false);
-            
-            if (iPodLogisticsDistribution.IsExtraShippingPriceRequired)
-            {
-                iPodLogisticsDistribution.PricePayableFor.SecondaryCountry = priceCalculator.CalculatePriceByCountry(iPodLogisticsDistribution.UnitsDeliverable.BySecondaryCounry, iPodLogisticsDistribution.PricePerUnit.SecondaryCountry, true);
-            }
-            Console.WriteLine("Vest Price = " + (iPodLogisticsDistribution.PricePayableFor.PrimaryCountry + iPodLogisticsDistribution.PricePayableFor.SecondaryCountry));
+            var bestPrice = priceCalculator.CalculateBestPrice(iPodLogisticsDistribution);
+           
+            Console.WriteLine("Vest Price = " + bestPrice);
         }
     }
 }

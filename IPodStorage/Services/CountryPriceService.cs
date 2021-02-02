@@ -3,8 +3,6 @@ using IPodStorage.ENums;
 using IPodStorage.Interfaces;
 using IPodStorage.Models;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace IPodStorage.Services
 {

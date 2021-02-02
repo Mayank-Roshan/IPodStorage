@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace IPodStorage.Constants
+﻿namespace IPodStorage.Constants
 {
     public static class LogisticsConstant
     {

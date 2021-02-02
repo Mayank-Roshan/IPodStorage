@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace IPodStorage.Models
+﻿namespace IPodStorage.Models
 {
     public class CountryBestPrice
     {
